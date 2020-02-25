@@ -12,7 +12,7 @@ defmodule Example.Todo do
   end
 
   @doc """
-  Creates a Todo in the database 
+  Creates a Todo in the database
   """
   def create(%Ecto.Changeset{} = changeset) do
     result = Example.Repo.insert(changeset)
@@ -25,7 +25,7 @@ defmodule Example.Todo do
   end
 
   @doc """
-  Updates a Todo in the database 
+  Updates a Todo in the database
   """
   def update(params) do
     result =
@@ -69,7 +69,7 @@ defmodule Example.Todo do
   @doc """
   Returns all Todos from the database
   """
-  def all() do 
+  def all() do
     todos =
       Example.Repo.all(__MODULE__)
       |> Enum.map(&to_result/1)
