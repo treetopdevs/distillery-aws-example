@@ -3,35 +3,29 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
-use Mix.Config
 
 # General application configuration
-config :distillery_example,
-  ecto_repos: [Example.Repo]
+use Mix.Config
+
+config :clecodes_ex,
+  ecto_repos: [ClecodesEx.Repo]
 
 # Configures the endpoint
-config :distillery_example, ExampleWeb.Endpoint,
+config :clecodes_ex, ClecodesExWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "WLTAq0m3cyhaqufuub/5RyX8E8/s2UR2P1cVJVWn0d46GixiKO6yaTa6i8B8jbzS",
-  render_errors: [view: ExampleWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Example.PubSub,
-           adapter: Phoenix.PubSub.PG2]
-
-config :phoenix, :json_library, Jason
+  secret_key_base: "Haeob0uZA6dWN+sDEW6rKgzH8TU1HpZ1S3YEHWLv/GNBdeczSJfP9lp8fzpEWJUk",
+  render_errors: [view: ClecodesExWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: ClecodesEx.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [signing_salt: "6hTrhdk5+kJHpJKKDrfDqAPkjGZO8LTh"]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:user_id]
+  metadata: [:request_id]
 
-config :libcluster,
-  topologies: [
-    example: [
-      strategy: Cluster.Strategy.Epmd,
-      config: [hosts: []]
-    ]
-  ]
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

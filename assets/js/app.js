@@ -1,25 +1,17 @@
-/*global app, $on */
-(function () {
-	'use strict';
+// We need to import the CSS so that webpack will load it.
+// The MiniCssExtractPlugin is used to separate it out into
+// its own CSS file.
+import css from "../css/app.css"
 
-	/**
-	 * Sets up a brand new Todo list.
-	 *
-	 * @param {string} name The name of your new to do list.
-	 */
-	function Todo(name) {
-		this.storage = new app.Store(name);
-		this.model = new app.Model(this.storage);
-		this.template = new app.Template();
-		this.view = new app.View(this.template);
-		this.controller = new app.Controller(this.model, this.view);
-	}
+// webpack automatically bundles all modules in your
+// entry points. Those entry points can be configured
+// in "webpack.config.js".
+//
+// Import dependencies
+//
+import "phoenix_html"
 
-	var todo = new Todo('todos-vanillajs');
-
-	function setView() {
-		todo.controller.setView(document.location.hash);
-	}
-	$on(window, 'load', setView);
-	$on(window, 'hashchange', setView);
-})();
+// Import local files
+//
+// Local files can be imported directly using relative paths, for example:
+// import socket from "./socket"

@@ -1,18 +1,20 @@
-# Distillery AWS Example App
+# ClecodesEx
 
-This application is intended to be used with the AWS guide in the Distillery documentation.
+To start your Phoenix server:
 
-## Running Locally
+  * Install dependencies with `mix deps.get`
+  * Create and migrate your database with `mix ecto.setup`
+  * Install Node.js dependencies with `cd assets && npm install`
+  * Start Phoenix endpoint with `mix phx.server`
 
-You need to have PostgreSQL installed locally. Adjust the configuration as needed.
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-- `mix do deps.get, compile`
-- `mix ecto.create`
-- `mix ecto.migrate`
-- `mix phx.server`
+Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-You can then open the app at `https://localhost:4000`
+## Learn more
 
-## License
-
-This project is licensed under Apache 2
+  * Official website: https://www.phoenixframework.org/
+  * Guides: https://hexdocs.pm/phoenix/overview.html
+  * Docs: https://hexdocs.pm/phoenix
+  * Forum: https://elixirforum.com/c/phoenix-forum
+  * Source: https://github.com/phoenixframework/phoenix

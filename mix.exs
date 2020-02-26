@@ -1,14 +1,14 @@
-defmodule Example.Mixfile do
+defmodule ClecodesEx.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :distillery_example,
+      app: :clecodes_ex,
       version: "0.1.0",
-      elixir: "~> 1.6",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixir: "~> 1.5",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
     ]
@@ -19,32 +19,33 @@ defmodule Example.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Example.Application, []},
+      mod: {ClecodesEx.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0"},
-      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix, "~> 1.4.14"},
+      {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:phoenix_html, "~> 2.10"},
-      {:plug_cowboy, "~> 2.0"},
-      {:ecto_sql, "~> 3.0"},
+      {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
-      {:jason, "~> 1.0"},
+      {:phoenix_html, "~> 2.11"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
-      {:distillery, "~> 2.0"},
-      {:libcluster, "~> 3.0"},
-      {:libcluster_ec2, "~> 0.4"},
+      {:jason, "~> 1.0"},
+      {:plug_cowboy, "~> 2.0"},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+      {:floki, ">= 0.0.0", only: :test},
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -58,26 +59,7 @@ defmodule Example.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"],
-      compile: ["compile", &compile_assets/1],
-      clean: ["clean", &clean_assets/1]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
-  end
-
-  defp compile_assets(_args) do
-    assets_dir = Path.join([Application.app_dir(:distillery_example, "priv"), "..", "assets"])
-    static_dir = Path.join(Application.app_dir(:distillery_example, "priv"), "static")
-    File.mkdir_p!(Path.join(static_dir, "js"))
-    File.mkdir_p!(Path.join(static_dir, "css"))
-    for item <- ["js", "css", "favicon.ico", "robots.txt"] do
-      File.cp_r!(Path.join(assets_dir, item), Path.join(static_dir, item))
-    end
-  end
-
-  defp clean_assets(_args) do
-    static_dir = Path.join(Application.app_dir(:distillery_example, "priv"), "static")
-    for item <- ["js", "css", "favicon.ico", "robots.txt"] do
-      File.rm_rf!(Path.join(static_dir, item))
-    end
   end
 end
