@@ -5,7 +5,7 @@ config :clecodes_ex, ClecodesExWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   version: Application.spec(:clecodes_ex, :vsn)
 
-config :clecodes_ex, config :clecodes_ex, ClecodesExWeb.Repo,
+  config :clecodes_ex, ClecodesExWeb.Repo,
   adapter: Ecto.Adapters.Postgres
 
 config :logger,
