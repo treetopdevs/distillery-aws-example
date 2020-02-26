@@ -6,9 +6,9 @@ set -x
 cd /opt/app || exit 1
 
 # Extract release
-tar -xzf distillery_example.tar.gz
+tar -xzf clecodes_ex.tar.gz
 # Clean up archive
-rm distillery_example.tar.gz
+rm clecodes_ex.tar.gz
 # Set permissions
 chown -R ec2-user:ec2-user /opt/app
 

@@ -43,8 +43,8 @@ environment :prod do
 end
 
 
-release :distillery_example do
-  set version: current_version(:distillery_example)
+release :clecodes_ex do
+  set version: current_version(:clecodes_ex)
   set applications: [
     :runtime_tools
   ]

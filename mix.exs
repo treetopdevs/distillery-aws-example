@@ -45,7 +45,8 @@ defmodule ClecodesEx.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
       {:floki, ">= 0.0.0", only: :test},
-      {:credo, "~> 1.2", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:distillery, "~> 2.1"}
     ]
   end
 

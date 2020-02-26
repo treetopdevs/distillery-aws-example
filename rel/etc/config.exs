@@ -30,7 +30,7 @@ db_password =
       raise "Unable to get database password, command exited with status #{status}:\n#{output}"
   end
 
-config :distillery_example, Example.Repo,
+config :clecodes_ex, Example.Repo,
   username: System.get_env("DATABASE_USER"),
   password: db_password,
   database: System.get_env("DATABASE_NAME"),
@@ -38,7 +38,7 @@ config :distillery_example, Example.Repo,
   pool_size: 15
 
 # Set configuration for Phoenix endpoint
-config :distillery_example, ExampleWeb.Endpoint,
+config :clecodes_ex, ExampleWeb.Endpoint,
   http: [port: 4000],
   url: [host: "localhost", port: 4000],
   root: ".",
@@ -50,7 +50,7 @@ config :libcluster,
       strategy: ClusterEC2.Strategy.Tags,
       ec2_tagname: "Name",
       ec2_tagvalue: "#{app}-#{env}",
-      app_prefix: "distillery_example"
+      app_prefix: "clecodes_ex"
     ]
   ]
 

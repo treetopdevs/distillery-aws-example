@@ -21,7 +21,7 @@ phases:
 
 artifacts:
   files:
-    - distillery_example.tar.gz
+    - clecodes_ex.tar.gz
     - appspec.yml
     - templates/infra.yml
     - templates/production.conf

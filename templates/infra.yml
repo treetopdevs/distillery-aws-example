@@ -867,7 +867,7 @@ Resources:
   DBSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
-      DBSubnetGroupDescription: "Subnet group for the distillery_example database"
+      DBSubnetGroupDescription: "Subnet group for the clecodes_ex database"
       SubnetIds:
         - !Ref SubnetDatabaseA
         - !Ref SubnetDatabaseB
