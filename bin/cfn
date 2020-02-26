@@ -74,9 +74,10 @@ function delete_bucket_versions(){
               "--bucket=\"" bucket "\"", \
               "--key=\"" $1 "\"", \
               "--version-id=\"" $2 "\"" \
-          | "/bin/sh >/dev/null"; \
+           \
           print "Deleted version " $2 "of " $1 " successfully"; \
          }'
+    echo "delete_bucket_versions..."
 }
 
 function delete_stack(){
@@ -136,15 +137,19 @@ function destroy_resources(){
     arns="$(bucket_arns)"
     for arn in "$arns"; do
         if [ ! -z "$arn" ]; then
+        echo "deleting bucket ${arn}..."
             disable_bucket_versioning "$arn"
             delete_bucket_versions "$arn"
         fi
     done
     # Delete infra stack
+    echo "deleting stack..."
     delete_stack "${STACK_NAME}-production"
     # Delete pipeline stack
+    echo "deleting pipeline..."
     delete_stack "${STACK_NAME}"
     # Delete log groups
+    echo "delete log groups..."
     aws logs describe-log-groups \
         --log-group-name-prefix="/aws/lambda/${APP_NAME}" | \
     jq '.logGroups[].logGroupName' --raw-output | \
