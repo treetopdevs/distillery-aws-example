@@ -1,9 +1,9 @@
 use Mix.Config
 
 # Application name
-app = System.get_env("APPLICATION_NAME")
-env = System.get_env("ENVIRONMENT_NAME")
-region = System.get_env("AWS_REGION")
+app = 'cle-mmw-aws-test-2' # System.get_env("APPLICATION_NAME")
+env = 'production' #System.get_env("ENVIRONMENT_NAME")
+region = 'us-east-1' #System.get_env("AWS_REGION")
 
 # Locate awscli
 aws = System.find_executable("aws")
