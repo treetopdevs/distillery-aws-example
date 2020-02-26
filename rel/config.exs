@@ -3,7 +3,7 @@
 |> Path.wildcard()
 |> Enum.map(&Code.eval_file(&1))
 
-use Mix.Releases.Config,
+use Distillery.Releases.Config,
     default_release: :default,
     default_environment: Mix.env()
 
@@ -29,7 +29,7 @@ environment :prod do
 
   # We use an extra config evaluated solely at runtime
   set config_providers: [
-    {Mix.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}
+    {Distillery.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}
   ]
 
   # We source control our service file, overlay it into the release tarball

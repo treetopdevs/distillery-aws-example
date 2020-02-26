@@ -17,7 +17,7 @@ compile: ## Build the application
 	mix do compile, phx.digest
 
 clean: ## Clean up generated artifacts
-	mix clean
+	mix distillery.release.clean
 
 rebuild: clean build ## Rebuild the application
 
@@ -27,5 +27,5 @@ image: ## Mimic CodeBuild build
 release: ## Build a release of the application with MIX_ENV=prod
 	MIX_ENV=prod mix do deps.get, compile
 	MIX_ENV=prod mix phx.digest
-	MIX_ENV=prod mix release
+	MIX_ENV=prod mix distillery.release
 	@cp _build/prod/rel/$(IMAGE_NAME)/releases/$(VERSION)/$(IMAGE_NAME).tar.gz $(IMAGE_NAME).tar.gz

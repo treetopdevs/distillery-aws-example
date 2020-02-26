@@ -1,56 +1,41 @@
+# In this file, we load production configuration and secrets
+# from environment variables. You can also hardcode secrets,
+# although such is generally not recommended and you have to
+# remember to add this file to your .gitignore.
 use Mix.Config
 
-# Application name
-app = 'cle-mmw-aws-test-2' # System.get_env("APPLICATION_NAME")
-env = 'production' #System.get_env("ENVIRONMENT_NAME")
-region = 'us-east-1' #System.get_env("AWS_REGION")
+database_url =
+  System.get_env("DATABASE_URL") ||
+    raise """
+    environment variable DATABASE_URL is missing.
+    For example: ecto://USER:PASS@HOST/DATABASE
+    """
 
-# Locate awscli
-aws = System.find_executable("aws")
+config :clecodes_ex, ClecodesEx.Repo,
+  # ssl: true,
+  url: database_url,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
-cond do
-  is_nil(app) ->
-    raise "APPLICATION_NAME is unset!"
-  is_nil(env) ->
-    raise "ENVIRONMENT_NAME is unset!"
-  is_nil(aws) ->
-    raise "Unable to find `aws` executable!"
-  :else ->
-    :ok
-end
+secret_key_base =
+  System.get_env("SECRET_KEY_BASE") ||
+    raise """
+    environment variable SECRET_KEY_BASE is missing.
+    You can generate one by calling: mix phx.gen.secret
+    """
 
-# Pull database password from SSM
-db_secret_name = "/#{app}/#{env}/database/password"
-db_password =
-  case System.cmd(aws, ["ssm", "get-parameter", "--region=#{region}", "--name=#{db_secret_name}", "--with-decryption"]) do
-    {json, 0} ->
-      %{"Parameter" => %{"Value" => password}} = Jason.decode!(json)
-      password
-    {output, status} ->
-      raise "Unable to get database password, command exited with status #{status}:\n#{output}"
-  end
-
-  config :clecodes_ex, ClecodesEx.Repo,
-  username: System.get_env("DATABASE_USER"),
-  password: db_password,
-  database: System.get_env("DATABASE_NAME"),
-  hostname: System.get_env("DATABASE_HOST"),
-  pool_size: 15
-
-# Set configuration for Phoenix endpoint
 config :clecodes_ex, ClecodesExWeb.Endpoint,
-  http: [port: 4000],
-  url: [host: "localhost", port: 4000],
-  root: ".",
-  secret_key_base: "u1QXlca4XEZKb1o3HL/aUlznI1qstCNAQ6yme/lFbFIs0Iqiq/annZ+Ty8JyUCDc"
+  http: [
+    port: String.to_integer(System.get_env("PORT") || "4000"),
+    transport_options: [socket_opts: [:inet6]]
+  ],
+  secret_key_base: secret_key_base
 
-# config :libcluster,
-#   topologies: [
-#     example: [
-#       strategy: ClusterEC2.Strategy.Tags,
-#       ec2_tagname: "Name",
-#       ec2_tagvalue: "#{app}-#{env}",
-#       app_prefix: "distillery_example"
-#     ]
-#   ]
-
+# ## Using releases (Elixir v1.9+)
+#
+# If you are doing OTP releases, you need to instruct Phoenix
+# to start each relevant endpoint:
+#
+#     config :clecodes_ex, ClecodesExWeb.Endpoint, server: true
+#
+# Then you can assemble a release by calling `mix release`.
+# See `mix help release` for more information.
