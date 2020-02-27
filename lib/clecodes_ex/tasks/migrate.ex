@@ -7,7 +7,7 @@ defmodule ClecodesEx.Tasks.Migrate do
     Providers.Elixir.init(["${RELEASE_ROOT_DIR}/etc/config.exs"])
     repo_config = Application.get_env(:distillery_example, ClecodesEx.Repo)
     repo_config = Keyword.put(repo_config, :adapter, Ecto.Adapters.Postgres)
-    repo_config = Keyword.put(repo_config, show_sensitive_data_on_connection_error: true)
+    repo_config = Keyword.put(repo_config, :show_sensitive_data_on_connection_error,  true)
     Application.put_env(:distillery_example, ClecodesEx.Repo, repo_config)
 
     # Start requisite apps
