@@ -6,7 +6,8 @@ config :clecodes_ex, ClecodesExWeb.Endpoint,
   version: Application.spec(:clecodes_ex, :vsn)
 
   config :clecodes_ex, ClecodesExWeb.Repo,
-  adapter: Ecto.Adapters.Postgres
+    adapter: Ecto.Adapters.Postgres,
+    show_sensitive_data_on_connection_error: true
 
 config :logger,
   level: :info,
