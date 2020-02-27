@@ -31,11 +31,12 @@ db_password =
   end
 
 config :distillery_example, ClecodesEx.Repo,
+  show_sensitive_data_on_connection_error: true
   username: System.get_env("DATABASE_USER"),
   password: db_password,
   database: System.get_env("DATABASE_NAME"),
   hostname: System.get_env("DATABASE_HOST"),
-  pool_size: 15
+  pool_size: 15,
 
 # Set configuration for Phoenix endpoint
 config :distillery_example, ClecodesExWeb.Endpoint,
