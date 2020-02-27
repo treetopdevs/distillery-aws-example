@@ -44,13 +44,13 @@ config :distillery_example, ClecodesExWeb.Endpoint,
   root: ".",
   secret_key_base: "u1QXlca4XEZKb1o3HL/aUlznI1qstCNAQ6yme/lFbFIs0Iqiq/annZ+Ty8JyUCDc"
 
-# config :libcluster,
-#   topologies: [
-#     example: [
-#       strategy: ClusterEC2.Strategy.Tags,
-#       ec2_tagname: "Name",
-#       ec2_tagvalue: "#{app}-#{env}",
-#       app_prefix: "distillery_example"
-#     ]
-#   ]
+  config :libcluster,
+  topologies: [
+    clecodes: [
+      strategy: ClusterEC2.Strategy.Tags,
+      ec2_tagname: "Name",
+      ec2_tagvalue: "#{app}-#{env}",
+      app_prefix: "distillery_example"
+    ]
+  ]
 

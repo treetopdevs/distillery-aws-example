@@ -9,6 +9,7 @@ defmodule ClecodesEx.Application do
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
+      {Cluster.Supervisor, [Application.get_env(:libcluster, :topologies), [name: ClecodesEx.ClusterSupervisor]]},
       ClecodesEx.Repo,
       # Start the endpoint when the application starts
       ClecodesExWeb.Endpoint

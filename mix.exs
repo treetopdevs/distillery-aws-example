@@ -46,7 +46,11 @@ defmodule ClecodesEx.MixProject do
       {:phoenix_live_view, "~> 0.7.1"},
       {:floki, ">= 0.0.0", only: :test},
       {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
-      {:distillery, "~> 2.1"}
+      {:distillery, "~> 2.1"},
+      {:ex_aws, "~> 2.1"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:libcluster, "~> 3.2"},
+      {:libcluster_ec2, "~> 0.5"}
     ]
   end
 
