@@ -18,7 +18,7 @@ defmodule ClecodesEx.Tasks.Migrate do
 
     # Start the repo
     IO.puts "==> Starting repo"
-    {:ok, _pid} = ClecodesEx.Repo.start_link(pool_size: 1, log: true, log_sql: true)
+    {:ok, _pid} = ClecodesEx.Repo.start_link(pool_size: 2, log: :info, log_sql: true)
 
     # Run the migrations for the repo
     IO.puts "==> Running migrations"
