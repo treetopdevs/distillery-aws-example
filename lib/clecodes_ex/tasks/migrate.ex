@@ -30,15 +30,18 @@ defmodule ClecodesEx.Tasks.Migrate do
     # Run the migrations for the repo
     IO.puts "==> Running migrations"
     priv_dir = Application.app_dir(:distillery_example, "priv")
+    IO.puts "==> Set priv_dir to "  <> migrations_dir
     migrations_dir = Path.join([priv_dir, "repo", "migrations"])
-
+    IO.puts "==> Set migrations_dir to " <> migrations_dir
     opts = [all: true]
-    pool = ClecodesEx.Repo.config[:pool]
-    if function_exported?(pool, :unboxed_run, 2) do
-      pool.unboxed_run(ClecodesEx.Repo, fn -> Ecto.Migrator.run(ClecodesEx.Repo, migrations_dir, :up, opts) end)
-    else
-      Ecto.Migrator.run(ClecodesEx.Repo, migrations_dir, :up, opts)
-    end
+    IO.puts "==> Set opts to all"
+    # pool = ClecodesEx.Repo.config[:pool]
+
+    # if function_exported?(pool, :unboxed_run, 2) do
+    #   pool.unboxed_run(ClecodesEx.Repo, fn -> Ecto.Migrator.run(ClecodesEx.Repo, migrations_dir, :up, opts) end)
+    # else
+    #   Ecto.Migrator.run(ClecodesEx.Repo, migrations_dir, :up, opts)
+    # end
 
     # Shut down
     :init.stop()
