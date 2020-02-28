@@ -4,6 +4,9 @@ use Mix.Config
 app = System.get_env("APPLICATION_NAME")
 env = System.get_env("ENVIRONMENT_NAME")
 region = System.get_env("AWS_REGION")
+db_user = System.get_env("DATABASE_USER")
+db_name = System.get_env("DATABASE_NAME")
+db_host = System.get_env("DATABASE_HOST")
 
 # Locate awscli
 aws = System.find_executable("aws")
@@ -15,6 +18,12 @@ cond do
     raise "ENVIRONMENT_NAME is unset!"
   is_nil(aws) ->
     raise "Unable to find `aws` executable!"
+  is_nil(db_user) ->
+    raise "No DB User"
+  is_nil(db_name) ->
+    raise "No DB Name"
+  is_nil(db_host) ->
+    raise "No DB Host"
   :else ->
     :ok
 end
@@ -32,10 +41,10 @@ db_password =
 
 config :distillery_example, ClecodesEx.Repo,
   show_sensitive_data_on_connection_error: true,
-  username: System.get_env("DATABASE_USER"),
+  username: db_user,
   password: db_password,
-  database: System.get_env("DATABASE_NAME"),
-  hostname: System.get_env("DATABASE_HOST"),
+  database: db_name,
+  hostname: db_host,
   pool_size: 15
 
 # Set configuration for Phoenix endpoint
@@ -54,4 +63,3 @@ config :distillery_example, ClecodesExWeb.Endpoint,
       app_prefix: "distillery_example"
     ]
   ]
-
