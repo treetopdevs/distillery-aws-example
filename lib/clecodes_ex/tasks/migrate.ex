@@ -8,6 +8,10 @@ defmodule ClecodesEx.Tasks.Migrate do
     repo_config = Application.get_env(:distillery_example, ClecodesEx.Repo)
     repo_config = Keyword.put(repo_config, :adapter, Ecto.Adapters.Postgres)
 
+    repo_config
+      |> inspect()
+      |> Logger.debug()
+
     Application.put_env(:distillery_example, ClecodesEx.Repo, repo_config)
 
     # Start requisite apps
