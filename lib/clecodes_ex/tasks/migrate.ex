@@ -3,16 +3,12 @@ defmodule ClecodesEx.Tasks.Migrate do
   @moduledoc false
 
   def migrate(_args) do
-    require Logger
-
     # Configure
     Providers.Elixir.init(["${RELEASE_ROOT_DIR}/etc/config.exs"])
     repo_config = Application.get_env(:distillery_example, ClecodesEx.Repo)
     repo_config = Keyword.put(repo_config, :adapter, Ecto.Adapters.Postgres)
 
-    repo_config
-      |> inspect()
-      |> Logger.debug()
+    IO.inspect repo_config
 
     Application.put_env(:distillery_example, ClecodesEx.Repo, repo_config)
 
