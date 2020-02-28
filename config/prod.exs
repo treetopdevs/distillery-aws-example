@@ -13,4 +13,3 @@ config :logger,
   level: :info,
   handle_sasl_reports: true,
   handle_otp_reports: true
-

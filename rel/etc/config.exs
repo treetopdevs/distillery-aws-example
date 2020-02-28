@@ -36,7 +36,7 @@ config :distillery_example, ClecodesEx.Repo,
   password: db_password,
   database: System.get_env("DATABASE_NAME"),
   hostname: System.get_env("DATABASE_HOST"),
-  pool_size: 15,
+  pool_size: 15
 
 # Set configuration for Phoenix endpoint
 config :distillery_example, ClecodesExWeb.Endpoint,

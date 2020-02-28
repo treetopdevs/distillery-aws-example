@@ -7,7 +7,6 @@ use Distillery.Releases.Config,
     default_release: :default,
     default_environment: Mix.env()
 
-
 environment :dev do
   set dev_mode: true
   set include_erts: false
@@ -42,11 +41,9 @@ environment :prod do
   ]
 end
 
-
 release :clecodes_ex do
   set version: current_version(:clecodes_ex)
   set applications: [
     :runtime_tools
   ]
 end
-
