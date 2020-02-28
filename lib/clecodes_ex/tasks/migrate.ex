@@ -30,7 +30,7 @@ defmodule ClecodesEx.Tasks.Migrate do
     # Run the migrations for the repo
     IO.puts "==> Running migrations"
     priv_dir = Application.app_dir(:distillery_example, "priv")
-    IO.puts "==> Set priv_dir to "  <> migrations_dir
+    IO.puts "==> Set priv_dir to "  <> priv_dir
     migrations_dir = Path.join([priv_dir, "repo", "migrations"])
     IO.puts "==> Set migrations_dir to " <> migrations_dir
     opts = [all: true]
